@@ -24,12 +24,17 @@ import {
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 export default function App() {
-  const [cityName, setCityName] = useState("Karachi");
+  const [cityName, setCityName] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [url, setUrl] = useState("");
+  const [time, setTime] = useState("");
   const apiKey = "363a0329911c1b074081245aae1023c3";
 
   function getWeather() {
+    var today = new Date();
+    var t =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    setTime(t);
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`
@@ -41,9 +46,44 @@ export default function App() {
           setUrl(
             "https://cff2.earth.com/uploads/2018/11/13015448/what-is-haze.jpg"
           );
+        } else if (resp.data.weather[0].description == "clear sky") {
+          setUrl(
+            "https://cdn.pixabay.com/photo/2018/08/06/22/55/sun-3588618__480.jpg"
+          );
+        } else if (resp.data.weather[0].description == "few clouds") {
+          setUrl(
+            "https://image.shutterstock.com/image-photo/few-random-white-clouds-blue-260nw-1780046486.jpg"
+          );
+        } else if (resp.data.weather[0].description == "scattered clouds") {
+          setUrl(
+            "https://previews.123rf.com/images/tcareob72/tcareob721509/tcareob72150900092/46100501-blue-sky-with-scattered-clouds-.jpg"
+          );
+        } else if (resp.data.weather[0].description == "broken clouds") {
+          setUrl(
+            "https://i1.sndcdn.com/artworks-000187452985-0qggy2-t500x500.jpg"
+          );
+        } else if (resp.data.weather[0].description == "shower rain") {
+          setUrl(
+            "https://photo-cdn.urdupoint.com/media/2018/06/_3/420x350/pic_1529566309.jpg"
+          );
+        } else if (resp.data.weather[0].description == "rain") {
+          setUrl(
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOyDgtGwIhvpUyOxcOTs4pHLw8SGx9q5FHEg&usqp=CAU"
+          );
+        } else if (resp.data.weather[0].description == "thunderstorm") {
+          setUrl(
+            "https://images.unsplash.com/photo-1600323847785-fe21bc36acdf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFpbiUyQyUyMHRodW5kZXJzdG9ybXxlbnwwfHwwfHw%3D&w=1000&q=80"
+          );
+        } else if (resp.data.weather[0].description == "snow") {
+          setUrl(
+            "https://static01.nyt.com/images/2019/11/26/us/26holiday-weather01sub/26holiday-weather01sub-mobileMasterAt3x.jpg"
+          );
+        } else if (resp.data.weather[0].description == "mist") {
+          setUrl(
+            "https://images.unsplash.com/photo-1559759748-029511daa8aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&w=1000&q=80"
+          );
         }
       });
-    console.log("done", url);
   }
   return (
     <NativeBaseProvider>
@@ -159,7 +199,7 @@ export default function App() {
                       }}
                       fontWeight="400"
                     >
-                      6 mins ago
+                      Data is from time: {time}
                     </Text>
                   </HStack>
                 </HStack>
