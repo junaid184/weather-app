@@ -50,15 +50,24 @@ export default function App() {
           setUrl(
             "https://cdn.pixabay.com/photo/2018/08/06/22/55/sun-3588618__480.jpg"
           );
-        } else if (resp.data.weather[0].description == "few clouds") {
+        } else if (
+          resp.data.weather[0].description == "few clouds" ||
+          "clouds"
+        ) {
           setUrl(
             "https://image.shutterstock.com/image-photo/few-random-white-clouds-blue-260nw-1780046486.jpg"
           );
-        } else if (resp.data.weather[0].description == "scattered clouds") {
+        } else if (
+          resp.data.weather[0].description == "scattered clouds" ||
+          "clouds"
+        ) {
           setUrl(
             "https://previews.123rf.com/images/tcareob72/tcareob721509/tcareob72150900092/46100501-blue-sky-with-scattered-clouds-.jpg"
           );
-        } else if (resp.data.weather[0].description == "broken clouds") {
+        } else if (
+          resp.data.weather[0].description == "broken clouds" ||
+          "clouds"
+        ) {
           setUrl(
             "https://i1.sndcdn.com/artworks-000187452985-0qggy2-t500x500.jpg"
           );
